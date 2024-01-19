@@ -19,6 +19,7 @@ extern "C" {
 #include "button.h"
 #include "qspi.h"
 #include "fs.h"
+#include "nvs.h"
 
 
 bool hwInit(void);

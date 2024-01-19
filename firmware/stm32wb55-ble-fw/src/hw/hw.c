@@ -51,6 +51,7 @@ bool hwInit(void)
   qspiInit();
   flashInit();
   fsInit();
+  nvsInit();
  
   
   return true;
