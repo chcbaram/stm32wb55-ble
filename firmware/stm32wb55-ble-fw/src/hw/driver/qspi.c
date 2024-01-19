@@ -837,6 +837,11 @@ static uint8_t QSPI_ResetMemory(QSPI_HandleTypeDef *hqspi)
 {
   QSPI_CommandTypeDef s_command;
 
+  if (HAL_QSPI_GetState(hqspi) != HAL_QSPI_STATE_READY)
+  {
+    HAL_QSPI_Abort(hqspi);
+  }
+
   /* Initialize the reset enable command */
   s_command.InstructionMode   = QSPI_INSTRUCTION_1_LINE;
   s_command.Instruction       = RESET_ENABLE_CMD;
