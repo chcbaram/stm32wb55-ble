@@ -14,7 +14,7 @@ const typedef struct
 } led_tbl_t;
 
 
-#ifdef _USE_HW_CLI
+#if CLI_USE(HW_LED)
 static void cliLed(cli_args_t *args);
 #endif
 
@@ -26,7 +26,7 @@ static const led_tbl_t led_tbl[LED_MAX_CH] =
   {GPIOA, GPIO_PIN_4 , GPIO_PIN_RESET, GPIO_PIN_SET},   // 2. BLE
 };
 
-#ifdef _USE_HW_CLI
+#if CLI_USE(HW_LED)
 static const char *led_name[LED_MAX_CH+1] = 
 {
   "0_LED ",   
@@ -57,7 +57,7 @@ bool ledInit(void)
     ledOff(i);
   }
 
-#ifdef _USE_HW_CLI
+#if CLI_USE(HW_LED)
   cliAdd("led", cliLed);
 #endif
   return true;
@@ -84,7 +84,7 @@ void ledToggle(uint8_t ch)
   HAL_GPIO_TogglePin(led_tbl[ch].port, led_tbl[ch].pin);
 }
 
-#ifdef _USE_HW_CLI
+#if CLI_USE(HW_LED)
 void cliLed(cli_args_t *args)
 {
   bool ret = false;

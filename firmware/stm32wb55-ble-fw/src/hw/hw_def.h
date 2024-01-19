@@ -32,4 +32,11 @@
 #define      HW_CLI_LINE_HIS_MAX    8
 #define      HW_CLI_LINE_BUF_MAX    64
 
+
+//-- USE CLI
+//
+#define _USE_CLI_HW_LED             1
+
+
+
 #endif
