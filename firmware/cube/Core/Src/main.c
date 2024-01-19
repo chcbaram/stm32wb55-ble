@@ -27,6 +27,7 @@
 #include "rtc.h"
 #include "sai.h"
 #include "spi.h"
+#include "tim.h"
 #include "usb.h"
 #include "gpio.h"
 
@@ -109,6 +110,7 @@ int main(void)
   MX_SPI1_Init();
   MX_RTC_Init();
   MX_SPI2_Init();
+  MX_TIM17_Init();
   MX_RF_Init();
   /* USER CODE BEGIN 2 */
 
