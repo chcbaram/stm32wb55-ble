@@ -56,8 +56,8 @@
 
 /* External variables --------------------------------------------------------*/
 extern I2C_HandleTypeDef hi2c3;
+extern IPCC_HandleTypeDef hipcc;
 extern TIM_HandleTypeDef htim17;
-extern PCD_HandleTypeDef hpcd_USB_FS;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -201,34 +201,6 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles USB high priority interrupt.
-  */
-void USB_HP_IRQHandler(void)
-{
-  /* USER CODE BEGIN USB_HP_IRQn 0 */
-
-  /* USER CODE END USB_HP_IRQn 0 */
-  HAL_PCD_IRQHandler(&hpcd_USB_FS);
-  /* USER CODE BEGIN USB_HP_IRQn 1 */
-
-  /* USER CODE END USB_HP_IRQn 1 */
-}
-
-/**
-  * @brief This function handles USB low priority interrupt, USB wake-up interrupt through EXTI line 28.
-  */
-void USB_LP_IRQHandler(void)
-{
-  /* USER CODE BEGIN USB_LP_IRQn 0 */
-
-  /* USER CODE END USB_LP_IRQn 0 */
-  HAL_PCD_IRQHandler(&hpcd_USB_FS);
-  /* USER CODE BEGIN USB_LP_IRQn 1 */
-
-  /* USER CODE END USB_LP_IRQn 1 */
-}
-
-/**
   * @brief This function handles TIM1 trigger and commutation interrupts and TIM17 global interrupt.
   */
 void TIM1_TRG_COM_TIM17_IRQHandler(void)
@@ -268,6 +240,48 @@ void I2C3_ER_IRQHandler(void)
   /* USER CODE BEGIN I2C3_ER_IRQn 1 */
 
   /* USER CODE END I2C3_ER_IRQn 1 */
+}
+
+/**
+  * @brief This function handles IPCC RX occupied interrupt.
+  */
+void IPCC_C1_RX_IRQHandler(void)
+{
+  /* USER CODE BEGIN IPCC_C1_RX_IRQn 0 */
+
+  /* USER CODE END IPCC_C1_RX_IRQn 0 */
+  HAL_IPCC_RX_IRQHandler(&hipcc);
+  /* USER CODE BEGIN IPCC_C1_RX_IRQn 1 */
+
+  /* USER CODE END IPCC_C1_RX_IRQn 1 */
+}
+
+/**
+  * @brief This function handles IPCC TX free interrupt.
+  */
+void IPCC_C1_TX_IRQHandler(void)
+{
+  /* USER CODE BEGIN IPCC_C1_TX_IRQn 0 */
+
+  /* USER CODE END IPCC_C1_TX_IRQn 0 */
+  HAL_IPCC_TX_IRQHandler(&hipcc);
+  /* USER CODE BEGIN IPCC_C1_TX_IRQn 1 */
+
+  /* USER CODE END IPCC_C1_TX_IRQn 1 */
+}
+
+/**
+  * @brief This function handles HSEM global interrupt.
+  */
+void HSEM_IRQHandler(void)
+{
+  /* USER CODE BEGIN HSEM_IRQn 0 */
+
+  /* USER CODE END HSEM_IRQn 0 */
+  HAL_HSEM_IRQHandler();
+  /* USER CODE BEGIN HSEM_IRQn 1 */
+
+  /* USER CODE END HSEM_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

@@ -22,7 +22,7 @@ extern "C" {
 #include "nvs.h"
 #include "usb.h"
 #include "cdc.h"
-
+#include "wpan.h"
 
 bool hwInit(void);
 

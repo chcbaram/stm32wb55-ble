@@ -53,9 +53,11 @@ bool hwInit(void)
   fsInit();
   nvsInit();
  
-  usbInit();
-  usbBegin(USB_CDC_MODE);
-  cdcInit();
+  // usbInit();
+  // usbBegin(USB_CDC_MODE);
+  // cdcInit();
     
+  wpanInit();
+
   return true;
 }

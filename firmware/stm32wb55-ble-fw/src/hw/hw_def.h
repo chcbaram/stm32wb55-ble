@@ -59,6 +59,8 @@
 #define      HW_USE_CDC             1
 #define      HW_USE_MSC             0
 
+#define _USE_HW_WPAN
+
 
 //-- USE CLI
 //

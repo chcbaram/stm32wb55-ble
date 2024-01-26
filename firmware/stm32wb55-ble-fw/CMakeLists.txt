@@ -29,6 +29,19 @@ file(GLOB SRC_FILES CONFIGURE_DEPENDS
 
   # USB
   src/lib/ST/STM32_USB_Device_Library/Core/Src/*.c  
+
+  # WPAN
+  # src/lib/ST/STM32_WPAN/ble/core/auto/*.c
+  # src/lib/ST/STM32_WPAN/ble/core/template/*.c
+  # src/lib/ST/STM32_WPAN/ble/svc/*.c
+  # src/lib/ST/STM32_WPAN/ble/svc/Src/*.c
+  # src/lib/ST/STM32_WPAN/interface/patterns/ble_thread/shci/*.c
+  # src/lib/ST/STM32_WPAN/interface/patterns/ble_thread/tl/*.csrc/lib/ST/STM32_WPAN/ble/svc/Src/*.c  
+  # src/lib/ST/STM32_WPAN/utilities/*.c  
+
+  # src/lib/ST/Utilities/sequencer/*.c
+  # src/lib/ST/Utilities/lpm/tiny_lpm/*.c
+  
 )
 
 # 하위폴더에 있는 파일까지 포함한다.
@@ -39,6 +52,10 @@ file(GLOB_RECURSE SRC_FILES_RECURSE CONFIGURE_DEPENDS
   src/common/*.c
   src/hw/*.c
   src/lib/ST/STM32WBxx_HAL_Driver/Src/*.c
+
+  # WPAN
+  src/lib/ST/STM32_WPAN/*.c
+  src/lib/ST/Utilities/*.c
 )
 
 # 특정 폴더를 빌드에서 제외한다.
@@ -87,6 +104,23 @@ target_include_directories(${EXECUTABLE} PRIVATE
   src/hw/driver/usb/usb_cdc
   src/hw/driver/usb/usb_msc
   src/lib/ST/STM32_USB_Device_Library/Core/Inc
+
+  # WPAN
+  src/hw/driver/wpan
+  src/hw/driver/wpan/app/include
+  src/hw/driver/wpan/core/include
+
+  src/lib/ST/STM32_WPAN
+  src/lib/ST/STM32_WPAN/ble
+  src/lib/ST/STM32_WPAN/utilities
+  src/lib/ST/STM32_WPAN/interface/patterns/ble_thread/tl
+  src/lib/ST/STM32_WPAN/interface/patterns/ble_thread/shci
+  src/lib/ST/STM32_WPAN/ble/core
+  src/lib/ST/STM32_WPAN/ble/core/template
+  
+  src/lib/ST/Utilities/sequencer
+  src/lib/ST/Utilities/lpm/tiny_lpm
+  
   )
 
 target_compile_definitions(${EXECUTABLE} PRIVATE
@@ -120,6 +154,9 @@ target_link_options(${EXECUTABLE} PRIVATE
   -lstdc++
   -lsupc++
   # -lnosys
+
+  -u _printf_float
+  
   -Wl,-Map=${PRJ_NAME}.map,--cref
   -Wl,--gc-sections
   -Xlinker -print-memory-usage -Xlinker

@@ -42,7 +42,7 @@ void MX_USB_PCD_Init(void)
   hpcd_USB_FS.Init.dev_endpoints = 8;
   hpcd_USB_FS.Init.speed = PCD_SPEED_FULL;
   hpcd_USB_FS.Init.phy_itface = PCD_PHY_EMBEDDED;
-  hpcd_USB_FS.Init.Sof_enable = ENABLE;
+  hpcd_USB_FS.Init.Sof_enable = DISABLE;
   hpcd_USB_FS.Init.low_power_enable = DISABLE;
   hpcd_USB_FS.Init.lpm_enable = DISABLE;
   hpcd_USB_FS.Init.battery_charging_enable = DISABLE;
@@ -60,11 +60,21 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef* pcdHandle)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
   if(pcdHandle->Instance==USB)
   {
   /* USER CODE BEGIN USB_MspInit 0 */
 
   /* USER CODE END USB_MspInit 0 */
+
+  /** Initializes the peripherals clock
+  */
+    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USB;
+    PeriphClkInitStruct.UsbClockSelection = RCC_USBCLKSOURCE_HSI48;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+    {
+      Error_Handler();
+    }
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
     /**USB GPIO Configuration
@@ -80,12 +90,6 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef* pcdHandle)
 
     /* USB clock enable */
     __HAL_RCC_USB_CLK_ENABLE();
-
-    /* USB interrupt Init */
-    HAL_NVIC_SetPriority(USB_HP_IRQn, 6, 0);
-    HAL_NVIC_EnableIRQ(USB_HP_IRQn);
-    HAL_NVIC_SetPriority(USB_LP_IRQn, 6, 0);
-    HAL_NVIC_EnableIRQ(USB_LP_IRQn);
   /* USER CODE BEGIN USB_MspInit 1 */
 
   /* USER CODE END USB_MspInit 1 */
@@ -109,9 +113,6 @@ void HAL_PCD_MspDeInit(PCD_HandleTypeDef* pcdHandle)
     */
     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_11|GPIO_PIN_12);
 
-    /* USB interrupt Deinit */
-    HAL_NVIC_DisableIRQ(USB_HP_IRQn);
-    HAL_NVIC_DisableIRQ(USB_LP_IRQn);
   /* USER CODE BEGIN USB_MspDeInit 1 */
 
   /* USER CODE END USB_MspDeInit 1 */

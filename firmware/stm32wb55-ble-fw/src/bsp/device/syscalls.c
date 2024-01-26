@@ -29,7 +29,7 @@
 #include <time.h>
 #include <sys/time.h>
 #include <sys/times.h>
-
+#include "uart.h"
 
 /* Variables */
 extern int __io_putchar(int ch) __attribute__((weak));
@@ -76,12 +76,13 @@ return len;
 
 __attribute__((weak)) int _write(int file, char *ptr, int len)
 {
-	int DataIdx;
+	// int DataIdx;
 
-	for (DataIdx = 0; DataIdx < len; DataIdx++)
-	{
-		__io_putchar(*ptr++);
-	}
+	// for (DataIdx = 0; DataIdx < len; DataIdx++)
+	// {
+	// 	__io_putchar(*ptr++);
+	// }
+	uartWrite(HW_LOG_CH, (uint8_t *)ptr, len);
 	return len;
 }
 

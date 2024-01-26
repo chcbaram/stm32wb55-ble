@@ -55,11 +55,12 @@ void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
-void USB_HP_IRQHandler(void);
-void USB_LP_IRQHandler(void);
 void TIM1_TRG_COM_TIM17_IRQHandler(void);
 void I2C3_EV_IRQHandler(void);
 void I2C3_ER_IRQHandler(void);
+void IPCC_C1_RX_IRQHandler(void);
+void IPCC_C1_TX_IRQHandler(void);
+void HSEM_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */

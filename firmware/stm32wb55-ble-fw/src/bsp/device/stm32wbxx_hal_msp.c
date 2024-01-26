@@ -27,4 +27,12 @@
   */
 void HAL_MspInit(void)
 {
+  __HAL_RCC_HSEM_CLK_ENABLE();
+
+  /* System interrupt init*/
+
+  /* Peripheral interrupt init */
+  /* HSEM_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(HSEM_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(HSEM_IRQn);  
 }
