@@ -52,10 +52,11 @@ bool hwInit(void)
   flashInit();
   fsInit();
   nvsInit();
- 
-  // usbInit();
-  // usbBegin(USB_CDC_MODE);
-  // cdcInit();
+
+
+  usbInit();
+  usbBegin(USB_CDC_MODE);
+  cdcInit();
     
   wpanInit();
 
